@@ -100,11 +100,27 @@
       <a href="https://patreon.com/155pod">Patreon</a>
       <a href="https://155pod.bandcamp.com/">Bandcamp</a>
       <a href="https://www.twitch.tv/155pod">Twitch</a>
-      <a href="https://podcasts.apple.com/ca/podcast/155/id1257621596">Apple Podcasts</a>
-      <a href="https://podcasts.google.com/feed/aHR0cDovL2JsaW5rMTU1LmxpYnN5bi5jb20vcnNz">Google Podcasts</a>
+      <a class="apple-only" href="https://podcasts.apple.com/ca/podcast/155/id1257621596">Apple Podcasts</a>
+      <a class="android-only" href="https://podcasts.google.com/feed/aHR0cDovL2JsaW5rMTU1LmxpYnN5bi5jb20vcnNz">Google Podcasts</a>
       <a href="https://open.spotify.com/show/6qMwn5BUMorpK57gvtIrv4">Spotify</a>
       <a href="https://stitcher.com/s?fid=143725&amp;refid=stpr">Stitcher</a>
       <a href="https://blink155.libsyn.com/rss">RSS</a>
     </nav>
+
+    <script>
+      if (navigator.platform) {
+        var likelyApple  = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+        var likelyAndroid = /(Android|Linux)/i.test(navigator.platform);
+
+        var style = document.createElement('style');
+        document.head.appendChild(style);
+        if (!likelyApple) {
+          style.sheet.insertRule('.apple-only { display: none }');
+        }
+        if (!likelyAndroid) {
+          style.sheet.insertRule('.android-only { display: none }');
+        }
+     }
+    </script>
   </body>
 </html>
