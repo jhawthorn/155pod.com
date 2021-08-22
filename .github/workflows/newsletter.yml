@@ -3,6 +3,8 @@ name: Update newsletter
 on:
   push:
     branches: [ main ]
+  schedule:
+    - cron: 55 5 * * 6 # 1:55 am in Toronto
 
 jobs:
   update:
