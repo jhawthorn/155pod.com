@@ -1,0 +1,30 @@
+name: Update newsletter
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+    - name: Install gems
+      run: |
+        gem i nokogiri feedjira activesupport
+    - name: Update newsletter
+      run: ruby scripts/update_newsletter.rb
+      env:
+        NEWSLETTER_FEED: ${{ secrets.NEWSLETTER_FEED }}
+    - name: Push updated feed
+      run: |
+        git config user.name "155pod"
+        git config user.email thepod@155pod.com
+        git status
+        git add newsletter
+        git commit -m "Updated $(date -u)" || exit 0
+        git push
